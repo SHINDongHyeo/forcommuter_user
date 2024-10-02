@@ -23,14 +23,6 @@ import DeletedUser from './entities/deleted_user.entity';
 			synchronize: true,
 		}),
 		TypeOrmModule.forFeature([User, DeletedUser, DeleteReason, DeletedReasonLog]),
-		JwtModule.registerAsync({
-			imports: [ConfigModule],
-			inject: [ConfigService],
-			useFactory: async (configService: ConfigService) => ({
-				secret: configService.get<string>('JWT_SECRET'),
-				signOptions: { expiresIn: '1y' },
-			}),
-		}),
 	],
 	controllers: [UserController],
 	providers: [UserService],

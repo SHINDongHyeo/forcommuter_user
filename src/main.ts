@@ -4,10 +4,10 @@ import { UserModule } from './user.module';
 import LoggingInterceptor from './logging.interceptor';
 
 async function bootstrap() {
-  const app = await NestFactory.create(UserModule);
-  const configService = app.get(ConfigService);
-  const port = configService.get<number>('NODE_PORT');
-  app.useGlobalInterceptors(new LoggingInterceptor());
-  await app.listen(port);
+	const app = await NestFactory.create(UserModule);
+	const configService = app.get(ConfigService);
+	const port = configService.get<number>('NODE_PORT');
+	app.useGlobalInterceptors(new LoggingInterceptor());
+	await app.listen(port);
 }
 bootstrap();
