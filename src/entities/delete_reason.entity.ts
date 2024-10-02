@@ -9,7 +9,10 @@ class DeleteReason {
 	@Column({ type: 'text' })
 	detail: string;
 
-	@OneToMany(() => DeletedReasonLog, (deletedReasonLog) => deletedReasonLog.id)
+	@OneToMany(
+		() => DeletedReasonLog,
+		(deletedReasonLog) => deletedReasonLog.id,
+	)
 	deletedReasonLogs: DeletedReasonLog[];
 }
 export default DeleteReason;

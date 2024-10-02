@@ -1,4 +1,10 @@
-import { Entity, Column, CreateDateColumn, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+	Entity,
+	Column,
+	CreateDateColumn,
+	OneToMany,
+	PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Provider } from '../user.interface';
 import DeletedReasonLog from './deleted_reason_log.entity';
 
@@ -7,7 +13,7 @@ class DeletedUser {
 	@PrimaryGeneratedColumn()
 	id: number;
 
-	@Column({ type: 'varchar', length: 100 })
+	@Column({ name: 'social_id', type: 'varchar', length: 100 })
 	socialId: string;
 
 	@Column({ type: 'varchar', length: 100 })
@@ -22,16 +28,19 @@ class DeletedUser {
 	@Column({ type: 'enum', enum: Provider })
 	provider: Provider;
 
-	@Column({ type: 'timestamp' })
+	@Column({ name: 'created_at', type: 'timestamp' })
 	createdAt: Date;
 
-	@CreateDateColumn({ type: 'timestamp' })
+	@CreateDateColumn({ name: 'deleted_at', type: 'timestamp' })
 	deletedAt: Date;
 
 	@Column({ type: 'text', nullable: true })
 	detail: string;
 
-	@OneToMany(() => DeletedReasonLog, (deletedReasonLog) => deletedReasonLog.id)
+	@OneToMany(
+		() => DeletedReasonLog,
+		(deletedReasonLog) => deletedReasonLog.id,
+	)
 	deletedReasonLogs: DeletedReasonLog[];
 }
 export default DeletedUser;
